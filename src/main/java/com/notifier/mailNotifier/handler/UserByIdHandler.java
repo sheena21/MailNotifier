@@ -1,22 +1,23 @@
 package com.notifier.mailNotifier.handler;
 
 import com.notifier.mailNotifier.entity.UserRequest;
-import com.notifier.mailNotifier.middleware.ProcessWrite;
+import com.notifier.mailNotifier.middleware.ProcessReadOne;
 import com.notifier.mailNotifier.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserRequestHandler implements ProcessWrite {
-
+public class UserByIdHandler implements ProcessReadOne {
     @Autowired
-    private UserRepo userRequestRepo;
+    private UserRepo userRepo;
 
-    public UserRequest doOperation(UserRequest userRequest) {
+
+    @Override
+    public UserRequest doOperation(long id) throws Exception {
         try {
-            return userRequestRepo.save(userRequest);
+            return userRepo.findById(id).get();
         } catch (Exception e) {
-            System.out.println("Error occured");
+            System.out.println("Error occured while getting user info");
             return null;
         }
     }

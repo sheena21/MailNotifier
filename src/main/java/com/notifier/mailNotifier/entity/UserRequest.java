@@ -1,15 +1,21 @@
 package com.notifier.mailNotifier.entity;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 @Document(collection = "UserRequest")
 public class UserRequest {
+
+    @Transient
+    public static final String SEQUENCE_NAME = "users_sequence";
+
     @Id
-    private Integer id;
+    private long id;
 
     @Pattern(regexp = "^(.+)@(.+)$", message = "Username cannot be null")
     private String username;
@@ -25,14 +31,11 @@ public class UserRequest {
     private String country;
     private Integer phoneNo;
 
-    public UserRequest() {
-    }
+    public UserRequest() { }
 
-    public Integer getId() {
-        return id;
-    }
+    public long getId() { return id; }
 
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -80,9 +83,7 @@ public class UserRequest {
         return city;
     }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
+    public void setCity(String city) { this.city = city; }
 
     public String getCountry() {
         return country;
