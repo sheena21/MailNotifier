@@ -37,28 +37,40 @@ public class UserController {
     @PostMapping()
     public ResponseEntity<?> saveUser(@Valid @RequestBody UserRequest userRequest) throws Exception {
         UserRequest user = userRequestHandler.doOperation(userRequest);
-        return new ResponseEntity<>(user, HttpStatus.CREATED);
+        if(user!=null)
+            return new ResponseEntity<>(user, HttpStatus.CREATED);
+        else
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
     }
 
     @GetMapping()
     public ResponseEntity<?> getList() throws Exception {
         List<UserRequest> userList = userListHandler.doOperation();
-        return new ResponseEntity<>(userList, HttpStatus.OK);
+        if(userList!=null)
+            return new ResponseEntity<>(userList, HttpStatus.OK);
+        else
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getUser(@Valid @PathVariable long id) throws Exception {
         UserRequest user = getUserById.doOperation(id);
-        return new ResponseEntity<>(user, HttpStatus.ACCEPTED);
+        if(user!=null)
+             return new ResponseEntity<>(user, HttpStatus.ACCEPTED);
+        else
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateUser(@Valid @PathVariable long id, @RequestBody UserRequest userRequest) throws Exception {
         UserRequest updatedUser = userUpdateHandler.doOperation(id, userRequest);
-        return new ResponseEntity<>(updatedUser, HttpStatus.ACCEPTED);
+        if(updatedUser!=null)
+             return new ResponseEntity<>(updatedUser, HttpStatus.ACCEPTED);
+        else
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
-    @PatchMapping("{id}")
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteUser(@Valid @PathVariable long id) throws Exception {
