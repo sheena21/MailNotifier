@@ -58,6 +58,7 @@ public class UserController {
         UserRequest updatedUser = userUpdateHandler.doOperation(id, userRequest);
         return new ResponseEntity<>(updatedUser, HttpStatus.ACCEPTED);
     }
+    @PatchMapping("{id}")
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteUser(@Valid @PathVariable long id) throws Exception {

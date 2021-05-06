@@ -30,7 +30,6 @@ public class UserRequest {
     private String city;
     private String country;
     private Integer phoneNo;
-
     public UserRequest() { }
 
     public long getId() { return id; }

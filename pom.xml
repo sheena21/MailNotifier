@@ -54,7 +54,14 @@
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger-ui</artifactId>
-			<version>2.10.2</version>
+			<version>2.9.2</version>
+		</dependency>
+
+		<!--Spring Mail -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+			<version>2.3.4.RELEASE</version>
 		</dependency>
 
 		<!-- Test -->
