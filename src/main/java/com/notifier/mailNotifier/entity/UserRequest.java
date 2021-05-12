@@ -5,8 +5,12 @@ import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import java.util.ArrayList;
+import java.util.List;
 
 @Document(collection = "UserRequest")
 public class UserRequest {
@@ -25,13 +29,34 @@ public class UserRequest {
     @NotBlank(message = "password should not be null")
     private String password;
 
-    private String dob;
-    private String address;
-    private String city;
-    private String country;
+    private String role;
     private Integer phoneNo;
 
     public UserRequest() { }
+
+    public UserRequest(long id, @Pattern(regexp = "^(.+)@(.+)$", message = "Username cannot be null")
+            String username, String fullName,
+                       @NotBlank(message = "password should not be null") String password, String role, Integer phoneNo) {
+        this.id = id;
+        this.username = username;
+        this.fullName = fullName;
+        this.password = password;
+        this.role = role;
+        this.phoneNo = phoneNo;
+    }
+
+    public UserRequest(String username,  String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 
     public long getId() { return id; }
 
@@ -61,36 +86,6 @@ public class UserRequest {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getDob() {
-        return dob;
-    }
-
-    public void setDob(String dob) {
-        this.dob = dob;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) { this.city = city; }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
     }
 
     public Integer getPhoneNo() {

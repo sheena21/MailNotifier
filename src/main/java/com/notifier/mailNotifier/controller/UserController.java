@@ -1,7 +1,10 @@
 package com.notifier.mailNotifier.controller;
 
 import com.notifier.mailNotifier.entity.UserRequest;
-import com.notifier.mailNotifier.handler.*;
+import com.notifier.mailNotifier.handler.UserByIdHandler;
+import com.notifier.mailNotifier.handler.UserListHandler;
+import com.notifier.mailNotifier.handler.UserRemoveHandler;
+import com.notifier.mailNotifier.handler.UserUpdateHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +17,6 @@ import java.util.List;
 @RequestMapping("/user-detail")
 @SuppressWarnings("unchecked")
 public class UserController {
-    @Autowired
-    private UserRequestHandler userRequestHandler;
 
     @Autowired
     private UserListHandler userListHandler;
@@ -34,30 +35,34 @@ public class UserController {
         return "Home";
     }
 
-    @PostMapping()
-    public ResponseEntity<?> saveUser(@Valid @RequestBody UserRequest userRequest) throws Exception {
-        UserRequest user = userRequestHandler.doOperation(userRequest);
-        return new ResponseEntity<>(user, HttpStatus.CREATED);
-
-    }
 
     @GetMapping()
     public ResponseEntity<?> getList() throws Exception {
         List<UserRequest> userList = userListHandler.doOperation();
-        return new ResponseEntity<>(userList, HttpStatus.OK);
+        if (userList != null)
+            return new ResponseEntity<>(userList, HttpStatus.OK);
+        else
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getUser(@Valid @PathVariable long id) throws Exception {
         UserRequest user = getUserById.doOperation(id);
-        return new ResponseEntity<>(user, HttpStatus.ACCEPTED);
+        if (user != null)
+            return new ResponseEntity<>(user, HttpStatus.ACCEPTED);
+        else
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateUser(@Valid @PathVariable long id, @RequestBody UserRequest userRequest) throws Exception {
         UserRequest updatedUser = userUpdateHandler.doOperation(id, userRequest);
-        return new ResponseEntity<>(updatedUser, HttpStatus.ACCEPTED);
+        if (updatedUser != null)
+            return new ResponseEntity<>(updatedUser, HttpStatus.ACCEPTED);
+        else
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteUser(@Valid @PathVariable long id) throws Exception {
