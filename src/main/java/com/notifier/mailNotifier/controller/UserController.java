@@ -1,5 +1,4 @@
 package com.notifier.mailNotifier.controller;
-
 import com.notifier.mailNotifier.entity.UserRequest;
 import com.notifier.mailNotifier.handler.UserByIdHandler;
 import com.notifier.mailNotifier.handler.UserListHandler;
