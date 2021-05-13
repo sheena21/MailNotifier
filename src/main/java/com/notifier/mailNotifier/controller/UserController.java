@@ -8,8 +8,8 @@ import com.notifier.mailNotifier.handler.UserUpdateHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.List;
 
@@ -30,13 +30,11 @@ public class UserController {
     @Autowired
     private UserRemoveHandler userRemoveHandler;
 
-    @GetMapping("/home")
-    public String getHome() {
-        return "Home";
-    }
+
 
 
     @GetMapping()
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     public ResponseEntity<?> getList() throws Exception {
         List<UserRequest> userList = userListHandler.doOperation();
         if (userList != null)
@@ -46,6 +44,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     public ResponseEntity<?> getUser(@Valid @PathVariable long id) throws Exception {
         UserRequest user = getUserById.doOperation(id);
         if (user != null)
@@ -55,6 +54,8 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN')")
+
     public ResponseEntity<?> updateUser(@Valid @PathVariable long id, @RequestBody UserRequest userRequest) throws Exception {
         UserRequest updatedUser = userUpdateHandler.doOperation(id, userRequest);
         if (updatedUser != null)
@@ -65,6 +66,7 @@ public class UserController {
 
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<?> deleteUser(@Valid @PathVariable long id) throws Exception {
         userRemoveHandler.doOperation(id);
         return new ResponseEntity<>(HttpStatus.OK);

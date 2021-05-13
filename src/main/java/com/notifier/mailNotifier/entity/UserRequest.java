@@ -34,9 +34,7 @@ public class UserRequest {
 
     public UserRequest() { }
 
-    public UserRequest(long id, @Pattern(regexp = "^(.+)@(.+)$", message = "Username cannot be null")
-            String username, String fullName,
-                       @NotBlank(message = "password should not be null") String password, String role, Integer phoneNo) {
+    public UserRequest(long id,   String username, String fullName,  String password, String role, Integer phoneNo) {
         this.id = id;
         this.username = username;
         this.fullName = fullName;
@@ -45,7 +43,7 @@ public class UserRequest {
         this.phoneNo = phoneNo;
     }
 
-    public UserRequest(String username,  String password) {
+    public UserRequest(String username, String password) {
         this.username = username;
         this.password = password;
     }
