@@ -1,19 +1,17 @@
 package com.notifier.mailNotifier.sequencer;
 
+
 import com.notifier.mailNotifier.entity.DatabaseSequence;
-import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Update;
-import org.springframework.stereotype.Service;
 
-import static org.springframework.data.mongodb.core.query.Criteria.where;
-import static org.springframework.data.mongodb.core.query.Query.query;
 import java.util.Objects;
 
 import static org.springframework.data.mongodb.core.FindAndModifyOptions.options;
-@Service
+import static org.springframework.data.mongodb.core.query.Criteria.where;
+import static org.springframework.data.mongodb.core.query.Query.query;
+
 public class SequenceGenerator {
 
     private  MongoOperations mongoOperations;

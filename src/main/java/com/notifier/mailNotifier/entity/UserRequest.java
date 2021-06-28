@@ -5,12 +5,8 @@ import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.FetchType;
-import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
-import java.util.ArrayList;
-import java.util.List;
 
 @Document(collection = "UserRequest")
 public class UserRequest {
@@ -32,9 +28,10 @@ public class UserRequest {
     private String role;
     private Integer phoneNo;
 
-    public UserRequest() { }
+    public UserRequest() {
+    }
 
-    public UserRequest(long id,   String username, String fullName,  String password, String role, Integer phoneNo) {
+    public UserRequest(long id, String username, String fullName, String password, String role, Integer phoneNo) {
         this.id = id;
         this.username = username;
         this.fullName = fullName;
@@ -56,7 +53,9 @@ public class UserRequest {
         this.role = role;
     }
 
-    public long getId() { return id; }
+    public long getId() {
+        return id;
+    }
 
     public void setId(long id) {
         this.id = id;

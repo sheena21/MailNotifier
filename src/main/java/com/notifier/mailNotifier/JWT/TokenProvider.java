@@ -1,6 +1,6 @@
 package com.notifier.mailNotifier.JWT;
 
-public class TokenProvider {
+public final class TokenProvider {
     private final String jwt;
 
     public TokenProvider(String jwt) {

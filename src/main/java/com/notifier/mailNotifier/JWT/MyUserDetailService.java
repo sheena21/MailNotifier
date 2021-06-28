@@ -4,17 +4,15 @@ import com.notifier.mailNotifier.entity.UserRequest;
 import com.notifier.mailNotifier.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-@Service
+
 public class MyUserDetailService implements UserDetailsService {
 
     @Autowired
@@ -29,6 +27,7 @@ public class MyUserDetailService implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(userRequest.getUsername(), userRequest.getPassword(), getAuthority(userRequest));
 
     }
+
     private Set<SimpleGrantedAuthority> getAuthority(UserRequest userRequest) {
         Set<SimpleGrantedAuthority> authorities = new HashSet<>();
         authorities.add(new SimpleGrantedAuthority("ROLE_" + userRequest.getRole()));

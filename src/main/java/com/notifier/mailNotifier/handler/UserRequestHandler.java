@@ -19,7 +19,7 @@ public class UserRequestHandler implements ProcessWrite {
    private BCryptPasswordEncoder bCryptPasswordEncoder;
     public UserRequest doOperation(UserRequest userRequest) {
       try {
-            //mailer.sendSimpleMessage("mahaksaxenaa@gmail.com", " Testing email", "Look this mail for test purpose with noreply");
+            mailer.sendSimpleMessage("mahaksaxenaa@gmail.com", " Testing email", "Look this mail for test purpose with noreply");
              userRequest.setPassword(bCryptPasswordEncoder.encode(userRequest.getPassword()));
             return userRequestRepo.save(userRequest);
         } catch (Exception e) {

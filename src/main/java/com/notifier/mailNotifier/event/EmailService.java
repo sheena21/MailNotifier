@@ -4,6 +4,8 @@ package com.notifier.mailNotifier.event;
 //import java.io.IOException;
 //import java.util.Map;
 
+import org.springframework.stereotype.Component;
+
 
 public interface EmailService {
     void sendSimpleMessage(String to,
